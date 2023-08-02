@@ -14,5 +14,6 @@ public class BrickController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        EventSystem.Instance.BrickHit(points);
     }
 }

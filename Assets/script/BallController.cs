@@ -31,7 +31,7 @@ public class BallController : MonoBehaviour
         } 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+     void OnCollisionEnter2D(Collision2D collision)
     {
         // handle ball collisions with the paadle and bricks
         if (collision.gameObject.CompareTag("Paddle"))
@@ -52,8 +52,14 @@ public class BallController : MonoBehaviour
             if(brickController != null)
             {
                 brickController.HitBrick();
-            //  GameManager.Instance.AddScore(brickController.points);
+                GameManager.Instance.AddScore(brickController.points);
             }
+
+        }
+        if (collision.gameObject.CompareTag("BottomWall"))
+        {
+            GameManager.Instance.GameOVer();
+            Destroy(gameObject); ///destroy the ball when the game is over 
         }
     }
 }

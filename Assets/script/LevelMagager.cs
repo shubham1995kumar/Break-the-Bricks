@@ -27,27 +27,28 @@ public class LevelMagager : MonoBehaviour
             for (int col = 0; col < numCols; col++)
             {
                 Vector2 brickPosition = new Vector2(col * bricksWidth * offset.x, row * brickHeight * offset.y);
-                int bricktype = Random.Range(0, brickPrefabs.Length); 
-        Instantiate(brickPrefabs[bricktype], brickPosition, Quaternion.identity, transform);
-             }
-}
+                int bricktype = Random.Range(0, brickPrefabs.Length);
+                Instantiate(brickPrefabs[bricktype], brickPosition, Quaternion.identity, transform);
+            }
+        }
 
-     }
-    /* public GameObject brickPrefab;
-     public Vector2Int size;
-     public Vector2 offset;
+    }
+    /*public GameObject brickPrefab;
+    public Vector2Int size;
+    public Vector2 offset;
 
-     private void Awake()
-     {
-         for (int row = 0; row < size.x; row++)
-         {
-             for (int col = 0; col < size.y; col++)   //(col * bricksWidth, row * brickHeight);
-             {
-                 GameObject newBrick = Instantiate(brickPrefab, transform);
-                 newBrick.transform.position = transform.position + new 
+    private void Awake()
+    {
+        for (int row = 0; row < size.x; row++)
+        {
+            for (int col = 0; col < size.y; col++)   //(col * bricksWidth, row * brickHeight);
+            {
+                GameObject newBrick = Instantiate(brickPrefab, transform);
+                newBrick.transform.position = transform.position + new Vector3((float)((size.x - 1) * 0.5f - row) * offset.x, col * offset.y, 0);
 
 
-             }
-         }
-     }*/
+
+            }
+        }
+    }*/
 }
