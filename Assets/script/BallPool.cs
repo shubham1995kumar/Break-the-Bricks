@@ -4,29 +4,36 @@ using UnityEngine;
 
 public class BallPool : MonoBehaviour
 {
-    public GameObject ballPrefab; // the prefab of the ball to be pooled
-    public int poolSize = 100;  // the number of balls to be pooled
+    public GameObject ballPrefab;
+    public int initialPoolSize = 100;
+    private Queue<GameObject> ballPool = new Queue<GameObject>();
 
-    private List<GameObject> ballPool = new List<GameObject>();
-
-    private void Start()
+    void Start()
     {
-        for (int i=0; i< poolSize; i++)
+        for (int i = 0; i < initialPoolSize; i++)
         {
             GameObject ball = Instantiate(ballPrefab);
             ball.SetActive(false);
-            ballPool.Add(ball);
+            ballPool.Enqueue(ball);
         }
     }
+
     public GameObject GetBall()
     {
-        for( int i = 0; i<ballPool.Count; i++)
+        if (ballPool.Count == 0)
         {
-            if(!ballPool[i].activeInHierarchy)
-            {
-                return ballPool[i];
-            }
+            GameObject newBall = Instantiate(ballPrefab);
+            return newBall;
         }
-        return null;
+
+        GameObject ball = ballPool.Dequeue();
+        ball.SetActive(true);
+        return ball;
+    }
+
+    public void ReturnBall(GameObject ball)
+    {
+        ball.SetActive(false);
+        ballPool.Enqueue(ball);
     }
 }

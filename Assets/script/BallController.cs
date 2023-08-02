@@ -10,12 +10,15 @@ public class BallController : MonoBehaviour
       public float initialSpeed = 5f; // Initial speed of the ball;
      private Rigidbody2D rb;
      private bool ballLaunched = false;
-
+    private GameObject ballPool;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero; //setting the initial velocity to zero.
+
+
+        ballPool = GameObject.Find("BallPool");
     }
      void Update()
     {
@@ -24,6 +27,7 @@ public class BallController : MonoBehaviour
             //lauch the ball when the player presses the spacebar.
             if(Input.GetKeyDown(KeyCode.Space))
             {
+                GameObject ball = ballPool.GetComponent<BallPool>().GetBall();
                 rb.velocity = new Vector2(1f, 1f).normalized * initialSpeed;
                 ballLaunched = true;
             }
@@ -52,13 +56,19 @@ public class BallController : MonoBehaviour
             if(brickController != null)
             {
                 brickController.HitBrick();
-                GameManager.Instance.AddScore(brickController.points);
+
+                if (brickController.health <= 0)
+                {
+                    GameManager.Instance.AddScore(brickController.points);
+                }
+               
             }
 
         }
         if (collision.gameObject.CompareTag("BottomWall"))
         {
             GameManager.Instance.GameOVer();
+            GameObject ball = ballPool.GetComponent<BallPool>().GetBall();
             Destroy(gameObject); ///destroy the ball when the game is over 
         }
     }

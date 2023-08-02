@@ -4,51 +4,39 @@ using UnityEngine;
 
 public class LevelMagager : MonoBehaviour
 {
-    public GameObject[] brickPrefabs; // an aaray to hold different brick prefabs;
-    public int numRow = 5; // number of rows of the bricks;
+    public GameObject[] brickPrefabs; // An array to hold different brick prefabs for each health value.
+    public int numRows = 5; // Number of rows of bricks.
+    public int numCols = 8; // Number of columns of bricks.
+    public float brickSpacingX = 1.0f; // Spacing between bricks in the X-axis.
+    public float brickSpacingY = 0.5f; // Spacing between bricks in the Y-axis.
 
-    public int numCols = 8;// number of columes of bricks
-    public Vector2 offset;
-    // Start is called before the first frame update
     void Start()
     {
         GenerateBricks();
-
     }
 
-    // Update is called once per frame
     void GenerateBricks()
     {
-        float bricksWidth = brickPrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
-        float brickHeight = brickPrefabs[0].GetComponent<SpriteRenderer>().bounds.size.y;
+        float halfBrickWidth = brickPrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x * 0.5f;
 
-        for (int row = 0; row < numRow; row++)
+        float totalBricksWidth = numCols * halfBrickWidth * 2 + (numCols - 1) * brickSpacingX;
+        float startX = -totalBricksWidth * 0.5f + halfBrickWidth;
+
+        float halfBrickHeight = brickPrefabs[0].GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+        float totalBricksHeight = numRows * halfBrickHeight * 2 + (numRows - 1) * brickSpacingY;
+
+        float screenHeight = 2f * Camera.main.orthographicSize;
+        float startY = screenHeight * 0.5f - totalBricksHeight * 0.5f + halfBrickHeight;
+
+        for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
             {
-                Vector2 brickPosition = new Vector2(col * bricksWidth * offset.x, row * brickHeight * offset.y);
-                int bricktype = Random.Range(0, brickPrefabs.Length);
-                Instantiate(brickPrefabs[bricktype], brickPosition, Quaternion.identity, transform);
+                Vector2 brickPosition = new Vector2(startX + col * (halfBrickWidth * 2 + brickSpacingX), startY - row * (halfBrickHeight * 2 + brickSpacingY));
+                int brickType = Mathf.Clamp(row, 0, brickPrefabs.Length - 1); // Choose the brick type based on the row (health value).
+                Instantiate(brickPrefabs[brickType], brickPosition, Quaternion.identity, transform);
             }
         }
-
     }
-    /*public GameObject brickPrefab;
-    public Vector2Int size;
-    public Vector2 offset;
 
-    private void Awake()
-    {
-        for (int row = 0; row < size.x; row++)
-        {
-            for (int col = 0; col < size.y; col++)   //(col * bricksWidth, row * brickHeight);
-            {
-                GameObject newBrick = Instantiate(brickPrefab, transform);
-                newBrick.transform.position = transform.position + new Vector3((float)((size.x - 1) * 0.5f - row) * offset.x, col * offset.y, 0);
-
-
-
-            }
-        }
-    }*/
 }
