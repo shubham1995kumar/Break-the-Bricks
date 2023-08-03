@@ -1424,11 +1424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickPrefabs:
-  - {fileID: 1045837126}
+  - {fileID: 754046681}
   - {fileID: 95596667752458817}
+  - {fileID: 1045837126}
   - {fileID: 158612584}
   - {fileID: 76184793}
-  - {fileID: 754046681}
   numRows: 5
   numCols: 8
   brickSpacingX: 0.2

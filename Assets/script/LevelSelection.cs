@@ -12,6 +12,10 @@ public class LevelSelection : MonoBehaviour
     {
         SceneManager.LoadScene("Level2"); // Load Level2 scene when the level 2 button is clicked.
     }
+    public void SelectLevel3()
+    {
+        SceneManager.LoadScene("Level3"); 
+    }
 
-    
+
 }
