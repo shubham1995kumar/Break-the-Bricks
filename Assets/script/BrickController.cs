@@ -10,11 +10,11 @@ public class BrickController : MonoBehaviour
     public void HitBrick()
     {
         health--;
-        if (health ==0)
+        if (health == 0)
         {
             Destroy(gameObject);
             EventSystem.Instance.BrickHit(points);
         }
-        
+
     }
 }

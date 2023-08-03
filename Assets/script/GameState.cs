@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public enum GameStates
 {
-    MainMen,
+    MainMenu,
     Playing,
     GameOver
 }

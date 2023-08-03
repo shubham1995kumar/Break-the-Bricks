@@ -6,19 +6,28 @@ public class PaddleController : MonoBehaviour
 {
     public float moveSpeed = 10f; // speed at which paddle moves
     public float paddleWidth = 2f;//width of the papddle 
+    private bool ballLaunched = false; // flag to check if the ball is launched
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Vector2 currentPosition = transform.position;
-        currentPosition.x += horizontalInput * moveSpeed * Time.deltaTime;
+        if (!ballLaunched)
+        {
+            // Move the paddle only when the ball is not launched
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float moveAmount = horizontalInput * moveSpeed * Time.deltaTime;
+            Vector2 currentPosition = transform.position;
+            currentPosition.x += moveAmount;
 
+            // Limit paddle movement within the screen
+            float halfPaddleWidth = paddleWidth / 2f;
+            currentPosition.x = Mathf.Clamp(currentPosition.x, -halfPaddleWidth, halfPaddleWidth);
 
-        // limit paddle movement within the screen
-        float halPaddleWidth = paddleWidth / 2f;
-        currentPosition.x = Mathf.Clamp(currentPosition.x, -halPaddleWidth, halPaddleWidth);
-
-        transform.position = currentPosition;
-
-
+            transform.position = currentPosition;
+        }
+    }
+    public void LaunchBall()
+    {
+        ballLaunched = true;
     }
 }
+
+

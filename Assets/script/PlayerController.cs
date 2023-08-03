@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Handle player input here, if needed.
+        
     }
 
     public void HandleBrickHit(int points)

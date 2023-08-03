@@ -21,7 +21,7 @@ public class PlayerModel : MonoBehaviour
 
         if(health <=0)
         {
-            GameManager.Instance.GameOVer();
+            GameManager.Instance.GameOver();
         }
     }
 }

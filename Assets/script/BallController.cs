@@ -1,15 +1,18 @@
+//ballController.cs
+
 using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    
-    // Update is called once per frame
-   
-      public float initialSpeed = 5f; // Initial speed of the ball;
-     private Rigidbody2D rb;
-     private bool ballLaunched = false;
+
+  
+
+    public float initialSpeed = 5f; // Initial speed of the ball;
+    private Rigidbody2D rb;
+    private bool ballLaunched = false;
     private GameObject ballPool;
 
     void Start()
@@ -20,22 +23,22 @@ public class BallController : MonoBehaviour
 
         ballPool = GameObject.Find("BallPool");
     }
-     void Update()
+    void Update()
     {
-       if (!ballLaunched)
+        if (!ballLaunched)
         {
             //lauch the ball when the player presses the spacebar.
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject ball = ballPool.GetComponent<BallPool>().GetBall();
                 rb.velocity = new Vector2(1f, 1f).normalized * initialSpeed;
                 ballLaunched = true;
             }
-      
-        } 
+
+        }
     }
 
-     void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         // handle ball collisions with the paadle and bricks
         if (collision.gameObject.CompareTag("Paddle"))
@@ -49,11 +52,11 @@ public class BallController : MonoBehaviour
             Vector2 ballDirection = new Vector2(newDirection, 1f).normalized;
             rb.velocity = ballDirection * initialSpeed;
         }
-        else if(collision.gameObject.CompareTag("Bricks"))
+        else if (collision.gameObject.CompareTag("Bricks"))
         {
             //handle bricks destructions and update the score
             BrickController brickController = collision.gameObject.GetComponent<BrickController>();
-            if(brickController != null)
+            if (brickController != null)
             {
                 brickController.HitBrick();
 
@@ -61,15 +64,17 @@ public class BallController : MonoBehaviour
                 {
                     GameManager.Instance.AddScore(brickController.points);
                 }
-               
+
             }
 
         }
         if (collision.gameObject.CompareTag("BottomWall"))
         {
-            GameManager.Instance.GameOVer();
-            GameObject ball = ballPool.GetComponent<BallPool>().GetBall();
-            Destroy(gameObject); ///destroy the ball when the game is over 
+            
+                GameManager.Instance.GameOver();
+                GameObject ball = ballPool.GetComponent<BallPool>().GetBall();
+                Destroy(gameObject); // destroy the ball when the game is over 
+            
         }
     }
 }
