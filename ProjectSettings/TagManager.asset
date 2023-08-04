@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - Bricks
   - BottomWall
+  - PowerUp
   layers:
   - Default
   - TransparentFX

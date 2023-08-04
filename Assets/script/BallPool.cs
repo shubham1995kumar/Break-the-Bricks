@@ -1,3 +1,4 @@
+//ballpool.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,5 +36,16 @@ public class BallPool : MonoBehaviour
     {
         ball.SetActive(false);
         ballPool.Enqueue(ball);
+    }
+
+    // Function to add balls to the pool
+    public void AddBallsToPool(int numBallsToAdd)
+    {
+        for (int i = 0; i < numBallsToAdd; i++)
+        {
+            GameObject ball = Instantiate(ballPrefab);
+            ball.SetActive(false);
+            ballPool.Enqueue(ball);
+        }
     }
 }
