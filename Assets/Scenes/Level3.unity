@@ -1042,6 +1042,7 @@ MonoBehaviour:
   powerUpType: 1
   paddleSizeIncreaseMultiplier: 1.5
   ballSpeedUpMultiplier: 1.5
+  paddleSizeIncreaseDuration: 3
 --- !u!1 &210207651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,6 +1379,7 @@ MonoBehaviour:
   powerUpType: 2
   paddleSizeIncreaseMultiplier: 1.5
   ballSpeedUpMultiplier: 1.5
+  paddleSizeIncreaseDuration: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,11 +1562,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickPrefabs:
-  - {fileID: 754046681}
-  - {fileID: 76184793}
-  - {fileID: 158612584}
   - {fileID: 1045837126}
   - {fileID: 95596667752458817}
+  - {fileID: 158612584}
+  - {fileID: 76184793}
+  - {fileID: 754046681}
   powerUpPrefabs:
   - {fileID: 1269307984}
   - {fileID: 195466899}
@@ -2133,6 +2135,7 @@ MonoBehaviour:
   powerUpType: 0
   paddleSizeIncreaseMultiplier: 1.5
   ballSpeedUpMultiplier: 1.5
+  paddleSizeIncreaseDuration: 3
 --- !u!1 &1529618413
 GameObject:
   m_ObjectHideFlags: 0
